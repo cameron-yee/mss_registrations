@@ -6,16 +6,44 @@ from datetime import datetime
 from outlook import Outlook
 import re
 
+def validateEmail(email):
+    if '@' not in email:
+        print('Enter a valid email address')
+        e = input('Email: ')
+        return validateEmail(e)
+    else:
+        e = email
+        return e
+
+
+def validateUse(use):
+    use = use.lower()
+    valid_use_inputs = ['use', 'u']
+    valid_preview_inputs  = ['preview', 'p']
+    if use not in valid_use_inputs and use not in valid_preview_inputs:
+        print('Select a valid input: use, u, preview, or p')
+        u = input('PREVIEW or Use: ')
+        return validateUse(u)
+    elif use in valid_use_inputs:
+        return str('Use')
+    elif use in valid_preview_inputs:
+        return str('PREVIEW')
+
+
 def getValues():
     first = input('Firstname: ')
     last = input('Lastname: ')
     city = input('City: ')
+
     email = input('Email: ')
+    valid_email = validateEmail(email)
+
     use = input('PREVIEW or Use: ')
+    valid_use = validateUse(use)
 
     username = first.lower()[0] + last.lower()
 
-    values = {'first': first, 'last': last, 'city': city, 'email': email, 'use': use, 'username': username,}
+    values = {'first': first, 'last': last, 'city': city, 'email': valid_email, 'use': valid_use, 'username': username}
 
     return values
 
@@ -74,12 +102,11 @@ def previewExcel(preview_workbook, values, password, pcount, pclear):
             for cell in col:
                cell.value = None 
 
-    if values['use'] == 'PREVIEW':
-        ws['A{}'.format(pcount)] = values['username']
-        ws['B{}'.format(pcount)] = password
-        ws['C{}'.format(pcount)] = values['first']
-        ws['D{}'.format(pcount)] = values['last']
-        ws['E{}'.format(pcount)] = values['email']
+    ws['A{}'.format(pcount)] = values['username']
+    ws['B{}'.format(pcount)] = password
+    ws['C{}'.format(pcount)] = values['first']
+    ws['D{}'.format(pcount)] = values['last']
+    ws['E{}'.format(pcount)] = values['email']
 
     pwb.save(preview_workbook)
 
@@ -93,13 +120,12 @@ def useExcel(use_workbook, values, password, ucount, uclear):
             for cell in col:
                cell.value = None 
 
-    if values['use'] == 'Use':
-        ws['A{}'.format(ucount)] = values['username']
-        ws['B{}'.format(ucount)] = password
-        ws['C{}'.format(ucount)] = values['first']
-        ws['D{}'.format(ucount)] = values['last']
-        ws['E{}'.format(ucount)] = values['email']
-        ws['F{}'.format(ucount)] = 'student{}'.format(values['last'].lower())
+    ws['A{}'.format(ucount)] = values['username']
+    ws['B{}'.format(ucount)] = password
+    ws['C{}'.format(ucount)] = values['first']
+    ws['D{}'.format(ucount)] = values['last']
+    ws['E{}'.format(ucount)] = values['email']
+    ws['F{}'.format(ucount)] = 'student{}'.format(values['last'].lower())
 
     pwb.save(use_workbook)
 
@@ -110,16 +136,16 @@ def addUserToMailMergeExcel(values):
 
 def addAnotherUser(pcount, pclear, ucount, uclear):
     con = input('Add another user? [Y/n]')
-    while con == 'Y':
+    while con == 'Y' or con =='':
         values = getValues()
-        password = updateUserList('/Users/cameronyee/Dropbox/MSSci Registrations/mssci USER LIST UPDATED.xlsx', values)
+        password = updateUserList('/Users/cyee/Desktop/mssci USER LIST UPDATED.xlsx', values)
 
         if values['use'] == 'PREVIEW':
-            previewExcel('/Users/cameronyee/Dropbox/MSSci Registrations/MSSCI MAIL MERGE PREVIEW.xlsx', values, password, pcount, pclear)
+            previewExcel('/Users/cyee/Desktop/MSSCI MAIL MERGE PREVIEW.xlsx', values, password, pcount, pclear)
             pcount += 1
             pclear = True
         elif values['use'] == 'Use':
-            useExcel('/Users/cameronyee/Dropbox/MSSci Registrations/MSSCI MAIL MERGE USER.xlsx', values, password, ucount, uclear)
+            useExcel('/Users/cyee/Desktop/MSSCI MAIL MERGE USER.xlsx', values, password, ucount, uclear)
             ucount += 1
             uclear = True
 
@@ -129,18 +155,22 @@ def addAnotherUser(pcount, pclear, ucount, uclear):
 if __name__ == '__main__':
     #read_mail()
     values = getValues()
-    password = updateUserList('/Users/cameronyee/Dropbox/MSSci Registrations/mssci USER LIST UPDATED.xlsx', values)
+    password = updateUserList('/Users/cyee/Desktop/mssci USER LIST UPDATED.xlsx', values)
     pcount = 2
     pclear = False
     ucount = 2
     uclear = False
+    use_inputs = ['use', 'u']
+    preview_inputs = ['preview', 'p']
 
-    if values['use'] == 'PREVIEW':
-        previewExcel('/Users/cameronyee/Dropbox/MSSci Registrations/MSSCI MAIL MERGE PREVIEW.xlsx', values, password, pcount, pclear)
+    if values['use'] in preview_inputs:
+        values['use'] = 'PREVIEW'
+        previewExcel('/Users/cyee/Desktop/MSSCI MAIL MERGE PREVIEW.xlsx', values, password, pcount, pclear)
         pcount += 1
         pclear = True
-    elif values['use'] == 'Use':
-        useExcel('/Users/cameronyee/Dropbox/MSSci Registrations/MSSCI MAIL MERGE USER.xlsx', values, password, ucount, uclear)
+    elif values['use'] in use_inputs:
+        values['use'] = 'Use'
+        useExcel('/Users/cyee/Desktop/MSSCI MAIL MERGE USER.xlsx', values, password, ucount, uclear)
         ucount += 1
         uclear = True
 
