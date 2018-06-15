@@ -149,7 +149,15 @@ def addAnotherUser(pcount, pclear, ucount, uclear):
             ucount += 1
             uclear = True
 
+        values['password'] = password
+        saveUsersForEmail(values, 'a')
         con = addAnotherUser(pcount, pclear, ucount, uclear)
+
+
+def saveUsersForEmail(values, w_or_a):
+    with open('./values.txt', w_or_a) as f:
+       f.write(str(values) + '\n') 
+       f.close()
 
 
 if __name__ == '__main__':
@@ -174,6 +182,8 @@ if __name__ == '__main__':
         ucount += 1
         uclear = True
 
+    values['password'] = password
+    saveUsersForEmail(values, 'w')
     addAnotherUser(pcount, pclear, ucount, uclear)
 
 
