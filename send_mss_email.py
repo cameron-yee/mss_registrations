@@ -1,14 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 import ast
-
-def email_auth():
-    with open('./email_auth.txt', 'r') as f:
-        contents = f.read()
-        lines = contents.splitlines()
-        sender_email = lines[0]
-        sender_password  = lines[1]
-        return sender_email, sender_password
+from email_auth import sender_email, sender_password
 
 def getUsers():
     with open('./values.txt', 'r') as f:
@@ -18,8 +11,8 @@ def getUsers():
         #print(lines)
         return lines
 
-def getMessage():
-    with open('/Users/cyee/Desktop/mss_registrations/message.txt', 'r') as f:
+def getMessage(message_type):
+    with open('/Users/cyee/Desktop/mss_registrations/{}_message.txt'.format(message_type), 'r') as f:
         contents = f.read()
         contents = str(contents)
         #print(contents)
@@ -40,12 +33,15 @@ def email():
         lower_last = last.lower()
         studentusername = 'student{}'.format(lower_last)
 
-        contents = getMessage() 
-        msg_content = contents.format(first=first, last=last, password=password, username=username, studentusername=studentusername)
-        message = MIMEText(msg_content, 'html')
+        msg_content = ''
+        if use == 'Use':
+            contents = getMessage('user') 
+            msg_content = contents.format(first=first, password=password, username=username, studentusername=studentusername)
+        else:
+            contents = getMessage('preview') 
+            msg_content = contents.format(first=first, password=password, username=username)
 
-        sender_email = email_auth()[0]
-        sender_password = email_auth()[1]
+        message = MIMEText(msg_content, 'html')
 
         message['From'] = 'Cameron Yee  <{}>'.format(sender_email)
         message['To'] = '{name} <{email}>'.format(name=first + last, email=email)
@@ -57,7 +53,7 @@ def email():
         server.starttls()
         server.login('{}'.format(sender_email), '{}'.format(sender_password))
         server.sendmail('{}'.format(sender_email),
-                        [email],
+                        [email, sender_email],
                         msg_full)
         server.quit()
 

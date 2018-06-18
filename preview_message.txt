@@ -1,0 +1,15 @@
+<p>Dear {first},</p>
+<p>Thank you for your interest in previewing the BSCS Middle School Science program. We are excited about sharing these materials with you. Your login information is below.</p>
+<p>&nbsp;</p>
+<p>TEACHER LOGIN</p>
+<p style="margin-left: .5in;">Student materials URL: <a href="http://elearn.bscs.org">http://elearn.bscs.org</a></p>
+<p style="margin-left: .5in;">Your username is: {username}</p>
+<p style="margin-left: .5in;">Your password is: {password}</p>
+<p>&nbsp;</p>
+<p>Teacher Edition PDFs can be found on our website <a href="https://bscs.org/middle-school-science">here</a>.</p>
+<p>This account will give you access to preview the materials for 30 days. The full program is currently available for free to teachers who agree to provide student pre- and post-test data (embedded in the student materials).</p>
+<p>I hope you enjoy your review of these materials, and please let me know if you would like to set up a full account and use this program in your classroom!</p>
+<p>&nbsp;</p>
+<p>Sincerely,</p>
+<p><strong><span style="color: #06446a;">Adrian Klein<br /></span></strong><strong><span style="color: #8c8c8c;">Technical Assistant&nbsp;</span></strong><span style="color: black;"><br /><br /></span><strong><span style="color: #06446a;">BSCS Science Learning</span></strong></p>
+<p><em><span style="font-size: 10.5pt; color: #8c8c8c;">Transforming Science Education through Research-Driven Innovation</span></em><span style="color: #8c8c8c;"><br />5415 Mark Dabling Blvd.<br />Colorado Springs, CO 80918<br />719-531-5550 main phone&nbsp;<br /></span><a href="mailto:aklein@bscs.org"><span style="color: #0563c1;">aklein@bscs.org</span></a> <span style="color: #4472c4;">&bull;&nbsp;</span><a href="http://www.bscs.org"><span style="color: #954f72;">www.bscs.org</span></a></p>
