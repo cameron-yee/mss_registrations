@@ -48,13 +48,6 @@ def getValues():
     return values
 
 
-def readMail():
-    mail = Outlook()
-    mail.login('cyee@bscs.org', 'Kosa2359')
-    mail.inbox()
-    print (mail.unread())
-
-
 def updateUserList(user_workbook, values):
     user_information = load_workbook(user_workbook)
     ws = user_information.active
@@ -171,13 +164,11 @@ if __name__ == '__main__':
     use_inputs = ['use', 'u']
     preview_inputs = ['preview', 'p']
 
-    if values['use'] in preview_inputs:
-        values['use'] = 'PREVIEW'
+    if values['use'] ==  'PREVIEW':
         previewExcel('/Users/cyee/Desktop/MSSCI MAIL MERGE PREVIEW.xlsx', values, password, pcount, pclear)
         pcount += 1
         pclear = True
-    elif values['use'] in use_inputs:
-        values['use'] = 'Use'
+    elif values['use'] == 'Use':
         useExcel('/Users/cyee/Desktop/MSSCI MAIL MERGE USER.xlsx', values, password, ucount, uclear)
         ucount += 1
         uclear = True
