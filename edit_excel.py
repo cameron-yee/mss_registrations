@@ -1,9 +1,8 @@
 from openpyxl import Workbook, load_workbook
 import smtplib
 import email
-import imaplib
+#import imaplib
 from datetime import datetime
-from outlook import Outlook
 import re
 
 def validateEmail(email):
