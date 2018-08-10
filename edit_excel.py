@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 from openpyxl import Workbook, load_workbook
 import smtplib
 import email
@@ -130,14 +131,14 @@ def addAnotherUser(pcount, pclear, ucount, uclear):
     con = input('Add another user? [Y/n]')
     while con == 'Y' or con =='':
         values = getValues()
-        password = updateUserList('/Users/cyee/Desktop/mssci USER LIST UPDATED.xlsx', values)
+        password = updateUserList('/Users/cyee/Dropbox/MSSci Registrations/mssci USER LIST UPDATED.xlsx', values)
 
         if values['use'] == 'PREVIEW':
-            previewExcel('/Users/cyee/Desktop/MSSCI MAIL MERGE PREVIEW.xlsx', values, password, pcount, pclear)
+            previewExcel('/Users/cyee/Dropbox/MSSci Registrations/MSSCI MAIL MERGE PREVIEW.xlsx', values, password, pcount, pclear)
             pcount += 1
             pclear = True
         elif values['use'] == 'Use':
-            useExcel('/Users/cyee/Desktop/MSSCI MAIL MERGE USER.xlsx', values, password, ucount, uclear)
+            useExcel('/Users/cyee/Dropbox/MSSci Registrations/MSSCI MAIL MERGE USER.xlsx', values, password, ucount, uclear)
             ucount += 1
             uclear = True
 
@@ -155,7 +156,7 @@ def saveUsersForEmail(values, w_or_a):
 if __name__ == '__main__':
     #read_mail()
     values = getValues()
-    password = updateUserList('/Users/cyee/Desktop/mssci USER LIST UPDATED.xlsx', values)
+    password = updateUserList('/Users/cyee/Dropbox/MSSci Registrations/mssci USER LIST UPDATED.xlsx', values)
     pcount = 2
     pclear = False
     ucount = 2
@@ -164,11 +165,11 @@ if __name__ == '__main__':
     preview_inputs = ['preview', 'p']
 
     if values['use'] ==  'PREVIEW':
-        previewExcel('/Users/cyee/Desktop/MSSCI MAIL MERGE PREVIEW.xlsx', values, password, pcount, pclear)
+        previewExcel('/Users/cyee/Dropbox/MSSci Registrations/MSSCI MAIL MERGE PREVIEW.xlsx', values, password, pcount, pclear)
         pcount += 1
         pclear = True
     elif values['use'] == 'Use':
-        useExcel('/Users/cyee/Desktop/MSSCI MAIL MERGE USER.xlsx', values, password, ucount, uclear)
+        useExcel('/Users/cyee/Dropbox/MSSci Registrations/MSSCI MAIL MERGE USER.xlsx', values, password, ucount, uclear)
         ucount += 1
         uclear = True
 

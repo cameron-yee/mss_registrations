@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 import smtplib
 from email.mime.text import MIMEText
 import ast
@@ -12,7 +13,7 @@ def getUsers():
         return lines
 
 def getMessage(message_type):
-    with open('/Users/cyee/Desktop/mss_registrations/{}_message.txt'.format(message_type), 'r') as f:
+    with open('/Users/cyee/Documents/mss_registrations/{}_message.txt'.format(message_type), 'r') as f:
         contents = f.read()
         contents = str(contents)
         #print(contents)
@@ -53,7 +54,7 @@ def email():
         server.starttls()
         server.login('{}'.format(sender_email), '{}'.format(sender_password))
         server.sendmail('{}'.format(sender_email),
-                        [email, sender_email],
+                        [email, sender_email], #send to self as confirmation
                         msg_full)
         server.quit()
 
