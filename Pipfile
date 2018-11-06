@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 openpyxl = "*"
 datetime = "*"
+pip = "==18.0"
 
 [dev-packages]
 
